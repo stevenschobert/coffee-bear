@@ -2,6 +2,9 @@ var express = require('express'),
     app = express(),
     coffeeBear = require('./coffee-bear');
 
+// configuration
+app.set('port', process.env.PORT || 5000);
+
 app.get('/api/measurements', function (req, res) {
   coffeeBear(function (err, data) {
     if (err) {
@@ -11,6 +14,6 @@ app.get('/api/measurements', function (req, res) {
   });
 });
 
-app.listen(3000, function () {
-  console.log('listening on port 3000');
+app.listen(app.get('port'), function () {
+  console.log('listening on port ' + app.get('port'));
 });
