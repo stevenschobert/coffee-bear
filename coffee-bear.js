@@ -6,7 +6,7 @@ var request = require('request'),
     tableToMeasurements = function tableToMeasurements (table) {
       var cupRows = table.find('tr').slice(3,-1),
           coffeeNames = ['ounces', 'grams', 'teaspoons', 'tablespoons', 'cups'],
-          waterNames = ['fluid-ounces', 'cups', 'pints', 'quarts', '1/2gal', 'milliliters', 'liters'],
+          waterNames = ['fluidounces', 'cups', 'pints', 'quarts', 'halfgallons', 'milliliters', 'liters'],
           cups = {};
 
       cupRows.each(function (i, elem) {
