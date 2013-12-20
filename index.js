@@ -11,8 +11,6 @@ app.get('/api/v1/measurements/:cups?', function (req, res) {
 
     if (err) { res.json(500, {error: err}); }
 
-    console.log(cups);
-
     if (cups === undefined) {
       res.json(data);
       return;
