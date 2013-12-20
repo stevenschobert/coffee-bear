@@ -4,6 +4,7 @@ var express = require('express'),
 
 // configuration
 app.set('port', process.env.PORT || 5000);
+app.use(express.logger());
 
 app.get('/api/v1/measurements/:cups?', function (req, res) {
   coffeeBear(function (err, data) {
