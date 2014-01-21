@@ -18,7 +18,7 @@ coffeeBear(function(err, data) {
 });
 ```
 
-## Example Data
+#### Example Data
 
 ```json
 {
