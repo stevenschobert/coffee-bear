@@ -48,6 +48,10 @@ coffeeBear(function(err, data) {
 });
 ```
 
+If you want to see a more detailed example, check out
+[coffee-api](https://github.com/stevenschobert/coffee-api), which uses
+[express](http://expressjs.com).
+
 ## Todo
 
 - Translate all measurement values into floating point numbers.
