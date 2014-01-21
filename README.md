@@ -4,20 +4,6 @@ coffee-bear
 
 Coffee measurements from [blackbearcoffee.com](http://blackbearcoffee.com/resources/83)
 
-## Usage
-
-```js
-var coffeeBear = require('./index');
-
-coffeeBear(function(err, data) {
-  if (err) { throw err; }
-
-  // data is an object with keys 0-12
-  // correspoding to the cups of coffee
-  console.log(data);
-});
-```
-
 #### Example Data
 
 ```json
@@ -41,6 +27,25 @@ coffeeBear(function(err, data) {
     }
   }
 }
+```
+## Installation
+
+```sh
+npm install --save coffee-bear
+```
+
+## Usage
+
+```js
+var coffeeBear = require('coffee-bear');
+
+coffeeBear(function(err, data) {
+  if (err) { throw err; }
+
+  // data is an object with keys 0-12
+  // correspoding to the cups of coffee
+  console.log(data);
+});
 ```
 
 ## Todo
