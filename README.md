@@ -1,4 +1,4 @@
 coffee-bear
 ===========
 
-Coffee measurements API from [blackbearcoffee.com](http://blackbearcoffee.com/resources/83)
+Coffee measurements from [blackbearcoffee.com](http://blackbearcoffee.com/resources/83)
