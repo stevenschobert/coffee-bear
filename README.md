@@ -43,4 +43,7 @@ coffeeBear(function(err, data) {
 }
 ```
 
+## Todo
+
+- Translate all measurement values into floating point numbers.
 
