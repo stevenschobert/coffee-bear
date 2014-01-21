@@ -1,31 +1,52 @@
-var express = require('express'),
-    app = express(),
-    coffeeBear = require('./coffee-bear');
+// dependencies
+var request = require('request'),
+    STATUS_CODES = require('http').STATUS_CODES,
+    cheerio = require('cheerio'),
 
-// configuration
-app.set('port', process.env.PORT || 5000);
-app.use(express.logger());
+    tableToMeasurements = function tableToMeasurements (table) {
+      var cupRows = table.find('tr').slice(3,-1),
+          coffeeNames = ['ounces', 'grams', 'teaspoons', 'tablespoons', 'cups'],
+          waterNames = ['fluidounces', 'cups', 'pints', 'quarts', 'halfgallons', 'milliliters', 'liters'],
+          cups = {};
 
-app.get('/api/v1/measurements/:cups?', function (req, res) {
-  coffeeBear(function (err, data) {
-    var cups = req.params.cups;
+      cupRows.each(function (i, elem) {
+        var cells = cheerio(elem).find('td'),
+            coffee = cells.slice(1, 6),
+            water = cells.slice(6, cells.length);
 
-    if (err) { res.json(500, {error: err}); }
+        cups[i+1] = { 'coffee': {}, 'water': {} };
 
-    if (cups === undefined) {
-      res.json(data);
-      return;
-    }
+        coffee.each(function (j, elem) {
+          cups[i+1].coffee[coffeeNames[j]] = cheerio(elem).text();
+        });
+        water.each(function (j, elem) {
+          cups[i+1].water[waterNames[j]] = cheerio(elem).text();
+        });
+      });
 
-    if (data[cups] !== undefined) {
-      res.json(data[cups]);
-      return;
-    }
+      return cups;
+    },
 
-    res.json(404, {error: 'Measurement not found' });
-  });
-});
+    brew = function brew (cb) {
+      var pour = function pour (err, res, body) {
+        var $, standard;
 
-app.listen(app.get('port'), function () {
-  console.log('listening on port ' + app.get('port'));
-});
+        if (err) {
+          return cb(err);
+        }
+
+        if (res.statusCode !== 200) {
+          return cb(new Error(STATUS_CODES[res.statusCode]));
+        }
+
+        $ = cheerio.load(body);
+        standard = $('#standard').parent().next();
+        //connoisseur = $('#connoisseur').parent().next();
+
+        cb(null, tableToMeasurements(standard));
+      };
+
+      request('http://blackbearcoffee.com/resources/83', pour);
+    };
+
+module.exports = brew;
