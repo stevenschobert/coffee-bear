@@ -1,24 +1,22 @@
 {
+  "author": "Steven Schobert <spschobert@gmail.com> (stevenschobert.com)",
   "name": "coffee-bear",
-  "version": "0.0.0",
-  "description": "Coffee measurements API from blackbearcoffee.com",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Coffee measurements from blackbearcoffee.com",
+  "keywords": [
+    "coffee"
+  ],
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/stevenschobert/coffee-bear.git"
   },
-  "author": "Steven Schobert <spschobert@gmail.com>",
-  "license": "BSD-2-Clause",
-  "bugs": {
-    "url": "https://github.com/stevenschobert/coffee-bear/issues"
-  },
-  "homepage": "https://github.com/stevenschobert/coffee-bear",
+  "main": "./index.js",
+  "license": "MIT",
   "dependencies": {
     "request": "~2.30.0",
-    "cheerio": "~0.12.4",
-    "express": "~3.4.7"
+    "cheerio": "~0.12.4"
+  },
+  "scripts": {
+    "test": "node test.js"
   }
 }
